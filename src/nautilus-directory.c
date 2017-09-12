@@ -1319,6 +1319,8 @@ nautilus_directory_notify_files_changed (GList *files)
     GHashTable *changed_lists;
     GList *node;
     GFile *location;
+    GFile *parent;
+    NautilusDirectory *dir;
     NautilusFile *file;
 
     /* Make a list of changed files in each directory. */
@@ -1344,6 +1346,27 @@ nautilus_directory_notify_files_changed (GList *files)
             nautilus_file_invalidate_extension_info_internal (file);
 
             hash_table_list_prepend (changed_lists, directory, file);
+        }
+        else
+        {
+            parent = g_file_get_parent (location);
+            dir = nautilus_directory_get_existing (parent);
+            if (dir != NULL && dir->details->new_files_in_progress != NULL &&
+                files != dir->details->new_files_in_progress_changes)
+            {
+                dir->details->new_files_in_progress_changes =
+                    g_list_prepend (dir->details->new_files_in_progress_changes,
+                                    g_object_ref (location));
+            }
+
+            if (dir != NULL)
+            {
+                nautilus_directory_unref (dir);
+            }
+            if (parent != NULL)
+            {
+                g_object_unref (parent);
+            }
         }
     }
 
