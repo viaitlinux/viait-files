@@ -332,7 +332,10 @@ nautilus_file_conflict_dialog_init (NautilusFileConflictDialog *fcd)
     gtk_container_add (GTK_CONTAINER (fcd->expander), hbox);
 
     widget = gtk_entry_new ();
-    gtk_box_pack_start (GTK_BOX (hbox), widget, TRUE, TRUE, 6);
+    gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, TRUE, 0);
+    gtk_widget_set_margin_end (widget, 6);
+    gtk_widget_set_margin_start (widget, 6);
+    gtk_widget_set_hexpand (widget, TRUE);
     fcd->entry = widget;
     g_signal_connect (widget, "changed",
                       G_CALLBACK (entry_text_changed_cb), dialog);
@@ -342,7 +345,10 @@ nautilus_file_conflict_dialog_init (NautilusFileConflictDialog *fcd)
     gtk_button_set_image (GTK_BUTTON (widget),
                           gtk_image_new_from_icon_name ("edit-undo",
                                                         GTK_ICON_SIZE_MENU));
-    gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 6);
+    gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
+    gtk_widget_set_margin_end (widget, 6);
+    gtk_widget_set_margin_start (widget, 6);
+
     g_signal_connect (widget, "clicked",
                       G_CALLBACK (reset_button_clicked_cb), dialog);
 

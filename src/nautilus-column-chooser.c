@@ -309,10 +309,11 @@ add_tree_view (NautilusColumnChooser *chooser)
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
                                     GTK_POLICY_AUTOMATIC,
                                     GTK_POLICY_AUTOMATIC);
+    gtk_widget_set_vexpand (scrolled, TRUE);
     gtk_widget_show (GTK_WIDGET (scrolled));
 
     gtk_container_add (GTK_CONTAINER (scrolled), view);
-    gtk_box_pack_start (GTK_BOX (chooser->main_box), scrolled, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (chooser->main_box), scrolled, FALSE, TRUE, 0);
 }
 
 static void
