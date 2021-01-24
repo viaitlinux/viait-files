@@ -1776,6 +1776,7 @@ static void
 select_pattern (NautilusFilesView *view)
 {
     GtkWidget *dialog;
+    GtkWidget *content_area;
     GtkWidget *label;
     GtkWidget *example;
     GtkWidget *grid;
@@ -1792,8 +1793,10 @@ select_pattern (NautilusFilesView *view)
                                           NULL);
     gtk_dialog_set_default_response (GTK_DIALOG (dialog),
                                      GTK_RESPONSE_OK);
-    gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-    gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), 2);
+
+    content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+    gtk_box_set_spacing (GTK_BOX (content_area), 2);
+    g_object_set (content_area, "margin", 18, NULL);
 
     label = gtk_label_new_with_mnemonic (_("_Pattern:"));
     gtk_widget_set_halign (label, GTK_ALIGN_START);
@@ -1813,7 +1816,7 @@ select_pattern (NautilusFilesView *view)
     grid = gtk_grid_new ();
     g_object_set (grid,
                   "orientation", GTK_ORIENTATION_VERTICAL,
-                  "border-width", 6,
+                  "margin", 6,
                   "row-spacing", 6,
                   "column-spacing", 12,
                   NULL);
