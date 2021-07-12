@@ -148,4 +148,3 @@ if appstream_util.found()
 endif
 
 subdir('ontology')
-subdir('tracker')
