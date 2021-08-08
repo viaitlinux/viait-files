@@ -2404,15 +2404,13 @@ nautilus_window_key_bubble (GtkEventControllerKey *controller,
                             GdkModifierType        state,
                             gpointer               user_data)
 {
-    g_autoptr (GdkEvent) event = NULL;
     GtkWidget *widget;
     NautilusWindow *window;
 
-    event = gtk_get_current_event ();
     widget = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (controller));
     window = NAUTILUS_WINDOW (widget);
     if (window->active_slot != NULL &&
-        nautilus_window_slot_handle_event (window->active_slot, (GdkEvent *) event))
+        nautilus_window_slot_handle_event (window->active_slot, controller, keyval, state))
     {
         return GDK_EVENT_STOP;
     }
@@ -2716,6 +2714,8 @@ nautilus_window_init (NautilusWindow *window)
                       "key-pressed", G_CALLBACK (nautilus_window_key_capture),
                       NULL);
 
+    /* After porting to GTK4, use gtk_search_entry_set_key_capture_widget() and
+     * remove this bubble phase controller. */
     window->key_bubble_controller = gtk_event_controller_key_new (GTK_WIDGET (window));
     gtk_event_controller_set_propagation_phase (window->key_bubble_controller,
                                                 GTK_PHASE_BUBBLE);
