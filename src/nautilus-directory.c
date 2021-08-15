@@ -2030,7 +2030,7 @@ nautilus_self_check_directory (void)
 
     while (g_hash_table_size (directories) != 0)
     {
-        gtk_main_iteration ();
+        g_main_context_iteration (NULL, TRUE);
     }
 
     EEL_CHECK_INTEGER_RESULT (g_hash_table_size (directories), 0);
@@ -2047,7 +2047,7 @@ nautilus_self_check_directory (void)
 
     while (!got_files_flag)
     {
-        gtk_main_iteration ();
+        g_main_context_iteration (NULL, TRUE);
     }
 
     EEL_CHECK_BOOLEAN_RESULT (directory->details->file_list == NULL, TRUE);
