@@ -139,15 +139,6 @@ typedef struct
 {
     CommonJob common;
     GFile *file;
-    gboolean interactive;
-    NautilusOpCallback done_callback;
-    gpointer done_callback_data;
-} MarkTrustedJob;
-
-typedef struct
-{
-    CommonJob common;
-    GFile *file;
     NautilusOpCallback done_callback;
     gpointer done_callback_data;
     guint32 file_permissions;
