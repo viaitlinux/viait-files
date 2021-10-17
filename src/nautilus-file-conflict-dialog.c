@@ -380,7 +380,12 @@ nautilus_file_conflict_dialog_init (NautilusFileConflictDialog *fcd)
     gtk_widget_grab_focus (fcd->replace_button);
 
     /* Setup HIG properties */
-    g_object_set (dialog_area, "margin", 18, NULL);
+    g_object_set (dialog_area,
+                  "margin-top", 18,
+                  "margin-bottom", 18,
+                  "margin-start", 18,
+                  "margin-end", 18,
+                  NULL);
     gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 
     gtk_widget_show_all (dialog_area);

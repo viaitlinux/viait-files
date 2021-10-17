@@ -3423,7 +3423,12 @@ create_column_editor (NautilusListView *view)
     gtk_window_set_default_size (GTK_WINDOW (window), 300, 400);
 
     box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-    g_object_set (box, "margin", 12, NULL);
+    g_object_set (box,
+                  "margin-top", 12,
+                  "margin-bottom", 12,
+                  "margin-start", 12,
+                  "margin-end", 12,
+                  NULL);
     gtk_widget_set_hexpand (box, TRUE);
     gtk_widget_set_vexpand (box, TRUE);
     gtk_widget_show (box);
